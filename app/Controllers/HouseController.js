@@ -5,7 +5,6 @@ function _draw(){
     let house = ProxyState.houses
     let template = ''
     house.forEach(house => template += house.Template)
-    console.log(template)
     document.getElementById('houses').innerHTML = template
 }
 
@@ -20,7 +19,6 @@ export default class HouseController{
         event.preventDefault();
         console.log("Hi there from the button")
         let form = event.target
-        console.log(form)
         let rawhouse = {
             price: parseFloat(form.price.value),
             bedrooms: parseFloat(form.bedrooms.value),
@@ -30,7 +28,6 @@ export default class HouseController{
             year: parseFloat(form.year.value),
             description: form.description.value
         }
-        console.log(rawhouse)
         houseService.createHouse(rawhouse);
     }
 

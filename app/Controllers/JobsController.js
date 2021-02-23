@@ -23,7 +23,7 @@ export default class JobsController{
             company: form.company.value,
             jobTitle: form.jobTitle.value,
             hours: form.hours.value,
-            salary: form.salary.value,
+            rate: form.rate.value,
             description: form.description.value
         }
         console.log(rawJob)

@@ -1,7 +1,7 @@
 import {generateId} from "../Utils/GenerateId.js" 
 
 export default class House{
-    constructor({price, bedrooms, bathrooms, levels, imgUrl, year, description}){
+    constructor({price, bedrooms, bathrooms, levels, imgUrl, year, description, _id, id}){
         this.price = price;
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
@@ -9,7 +9,7 @@ export default class House{
         this.imgUrl = imgUrl;
         this.year = year;
         this.description = description;
-        this.id = generateId();
+        this.id =  _id || id
     }
 
     get Template(){
