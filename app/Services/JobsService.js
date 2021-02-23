@@ -51,14 +51,57 @@ class JobsService{
 
     // NOTE rebuilding from memory to try and get more practice.
 
+    // constructor(){
+    //     this.getJob()
+    // }
+
+    // async getJob(){
+    //     try {
+    //      const res = await api.get('jobs')
+    //     ProxyState.jobs = res.data.map(rawJobData => new Jobs(rawJobData))
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
+
+    // async createJob(rawJob){
+    //     try {
+    //         const res = await api.post("jobs", rawJob)
+    //         ProxyState.jobs = [...ProxyState.jobs, new Job(res.data)]
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
+
+    // async applyJob(id){
+    //     let job = ProxyState.jobs.find(job => job.id === id)
+    //     job.status = "Applied"
+    //     try {
+    //         const res = await api.put("jobs/" + id, job)
+    //         ProxyState.jobs = ProxyState.jobs
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
+
+    // async deleteJob(id){
+    //     try {
+    //         await api.delete('jobs/' + id)
+    //         this.getJob()
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
+    // NOTE rebuilding it again to get more practice
+
     constructor(){
         this.getJob()
     }
 
     async getJob(){
         try {
-         const res = await api.get('jobs')
-        ProxyState.jobs = res.data.map(rawJobData => new Jobs(rawJobData))
+            const res = await api.get('jobs')
+            ProxyState.jobs = res.data.map(rawJobData => new Job(rawJobData))
         } catch (error) {
             console.error(error)
         }
@@ -66,7 +109,7 @@ class JobsService{
 
     async createJob(rawJob){
         try {
-            const res = await api.post("jobs", rawJob)
+            const res = await api.post('jobs', rawJob)
             ProxyState.jobs = [...ProxyState.jobs, new Job(res.data)]
         } catch (error) {
             console.error(error)
@@ -75,9 +118,9 @@ class JobsService{
 
     async applyJob(id){
         let job = ProxyState.jobs.find(job => job.id === id)
-        job.status = "Applied"
+        job.status = "Applied!"
         try {
-            const res = await api.put("jobs/" + id, job)
+            await api.put('jobs/' + id, job)
             ProxyState.jobs = ProxyState.jobs
         } catch (error) {
             console.error(error)
@@ -93,5 +136,6 @@ class JobsService{
         }
     }
 }
+
 
 export const jobsService = new JobsService();

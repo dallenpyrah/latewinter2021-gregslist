@@ -72,47 +72,90 @@ class CarsService{
 
 // NOTE I am building it again to get practice this time without looking. 
 
+//     constructor(){
+//     this.getCars()
+//   }
+
+//     async getCars(){
+//     try {
+//       const res = await api.get('cars')
+//       ProxyState.cars = res.data.map(rawCarData => new Car(rawCarData))
+//     } catch (error) {
+//       console.error(error)
+//     }
+//   }
+//    async createCar(rawCar){
+//     try {
+//       const res = await api.post('cars', rawCar)
+//       ProxyState.cars = [...ProxyState.cars, new Car(res.data)]
+//     } catch (error) {
+//         console.error
+//     }
+//   }
+
+//     async bid(id){
+//       let car = ProxyState.cars.find(car => car.id === id)
+//       car.price += 10000
+//       try {
+//         const res = await api.put('cars/' + id, car)
+//         ProxyState.cars = ProxyState.cars
+//       } catch (error) {
+        
+//       }
+
+//  }
+
+//     async deleteCar(id){
+//         try {
+//           const res = await api.delete('cars/' + id)
+//           this.getCars()
+//         } catch (error) {
+//           console.error(error)
+//         }
+//     }
+// NOTE I am rebuilding it again to get more practice
+
     constructor(){
-    this.getCars()
-  }
+      this.getCars()
+    }
 
     async getCars(){
-    try {
-      const res = await api.get('cars')
-      ProxyState.cars = res.data.map(rawCarData => new Car(rawCarData))
-    } catch (error) {
-      console.error(error)
-    }
-  }
-   async createCar(rawCar){
-    try {
-      const res = await api.post('cars', rawCar)
-      ProxyState.cars = [...ProxyState.cars, new Car(res.data)]
-    } catch (error) {
-        console.error
-    }
-  }
-
-    async bid(id){
-      let car = ProxyState.cars.find(car => car.id === id)
-      car.price += 10000
       try {
-        const res = await api.put('cars/' + id, car)
-        ProxyState.cars = ProxyState.cars
+        const res = await api.get('cars')
+        ProxyState.cars = res.data.map(rawCarData => new Car(rawCarData))
       } catch (error) {
-        
+        console.error(error)
       }
+    }
 
- }
-
-    async deleteCar(id){
+    async createCar(rawCar){
         try {
-          const res = await api.delete('cars/' + id)
+          await api.post('cars', rawCar)
           this.getCars()
         } catch (error) {
           console.error(error)
         }
     }
 
+    async bid(id){
+      let car = ProxyState.cars.find(car => car.id === id)
+      car.price += 1000
+
+      try {
+        await api.put('cars/' + id, car)
+        this.getCars()
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    async deleteCar(id){
+      try {
+        await api.delete('cars/' + id)
+        this.getCars()
+      } catch (error) {
+        console.error()
+      }
+    }
 }
 export const carsService = new CarsService()

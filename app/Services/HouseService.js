@@ -50,6 +50,49 @@ class HouseService{
     // }
     // NOTE rebuilding again to get more practice.
 
+    // constructor(){
+    //     this.getHouse()
+    // }
+
+    // async getHouse(){
+    //     try {
+    //         const res = await api.get('houses')
+    //         ProxyState.houses = res.data.map(rawHouseData => new House(rawHouseData))
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
+
+    // async createHouse(rawHouse){
+    //     try {
+    //         const res = await api.post('houses', rawHouse)
+    //         this.getHouse()
+    //     } catch (error) {
+    //         console.error()
+    //     }
+    // }
+
+    // async bidHouse(id){
+    //     let house = ProxyState.houses.find(h => h.id === id)
+    //     house.price += 10000
+    //     try {
+    //         const res = await api.put('houses/' + id, house)
+    //         ProxyState.houses = ProxyState.houses
+    //     } catch (error) {
+    //         console.error
+    //     }
+    // }
+
+    // async deleteHouse(id){
+    //     try {
+    //         await api.delete('houses/' + id)
+    //         this.getHouse()
+    //     } catch (error) {
+    //         console.error()
+    //     }
+    // }
+    // NOTE rebuilding it again.
+
     constructor(){
         this.getHouse()
     }
@@ -57,7 +100,7 @@ class HouseService{
     async getHouse(){
         try {
             const res = await api.get('houses')
-            ProxyState.houses = res.data.map(rawHouseData => new House(rawHouseData))
+             ProxyState.houses = res.data.map(rawHouseData => new House(rawHouseData))
         } catch (error) {
             console.error(error)
         }
@@ -68,18 +111,18 @@ class HouseService{
             const res = await api.post('houses', rawHouse)
             this.getHouse()
         } catch (error) {
-            console.error()
+            console.error(error)
         }
     }
 
     async bidHouse(id){
         let house = ProxyState.houses.find(h => h.id === id)
-        house.price += 10000
+        house.price += 100000
         try {
-            const res = await api.put('houses/' + id, house)
-            ProxyState.houses = ProxyState.houses
+            await api.put('houses/' + id, house)
+            this.getHouse()
         } catch (error) {
-            console.error
+            console.error(error)
         }
     }
 
@@ -88,7 +131,7 @@ class HouseService{
             await api.delete('houses/' + id)
             this.getHouse()
         } catch (error) {
-            console.error()
+            console.error(error)
         }
     }
 }
